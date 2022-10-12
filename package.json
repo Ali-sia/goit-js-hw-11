@@ -1,30 +1,31 @@
 {
-  "name": "parcel-project-template",
-  "version": "2.0.0",
+  "name": "js-22",
+  "version": "1.0.0",
   "description": "",
-  "homepage": "https://goitacademy.github.io/Ali-sia/goit-js-hw-11",
+  "main": "index.js",
   "scripts": {
-    "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /Ali-sia/goit-js-hw-11/"
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "start": "parcel src/*.html"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goitacademy/Ali-sia/goit-js-hw-11.git"
+    "url": "git+https://github.com/luxplanjay/js-22.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/goitacademy/Ali-sia/goit-js-hw-11/issues"
+    "url": "https://github.com/luxplanjay/js-22/issues"
   },
-  "dependencies": {
-    "modern-normalize": "^1.1.0"
-  },
+  "homepage": "https://github.com/luxplanjay/js-22#readme",
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.6.0",
-    "parcel": "^2.6.0",
-    "parcel-reporter-clean-dist": "^1.0.4",
-    "posthtml-include": "^1.7.4"
-  },
-  "browserslist": "> 0.5%, last 2 versions, not dead"
+    "axios": "^1.1.2",
+    "notiflix": "^3.2.5",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-handlebars-precompile": "^1.0.2",
+    "parcel-plugin-nuke-dist": "^1.0.1",
+    "posthtml-include": "^1.7.4",
+    "simplelightbox": "^2.10.3"
+  }
 }
