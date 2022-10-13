@@ -19,12 +19,19 @@ export default class PhotoApiService {
 
     const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}&per_page=${this.per_page}&image_type=photo&orientation=horizontal&safesearch=true`;
 
-    // const response = await axios.get(url);
-    // return response.data;
-    // return await axios.get(`${url}${filter}`).then(response => response.data);
-
-    return fetch(url)
-      .then(response => response.json())
+    // return fetch(url)
+    //   .then(response => response.json())
+    //   .then(photo => {
+    //     this.incrementPage();
+    //     console.log('totalHits = ', photo.totalHits);
+    //     return photo;
+    //   });
+    return axios
+      .get(url)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => console.error(error))
       .then(photo => {
         this.incrementPage();
         console.log('totalHits = ', photo.totalHits);
