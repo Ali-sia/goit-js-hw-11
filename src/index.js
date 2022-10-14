@@ -26,9 +26,7 @@ function onSearchQuery(e) {
   photoApiService.searchQuery = e.currentTarget.elements.searchQuery.value;
 
   if (photoApiService.query.trim() === '') {
-    return Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.'
-    );
+    return showFailureSearchResult();
   }
 
   photoApiService.resetPage();
@@ -43,12 +41,11 @@ function appendPhotoMarkup(photo) {
 function fetchPhoto() {
   loadMoreBtn.show();
   loadMoreBtn.disable();
+
   photoApiService.fetchPhoto().then(photo => {
     if (photo.totalHits === 0) {
       loadMoreBtn.hide();
-      return Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
-      );
+      return showFailureSearchResult();
     }
 
     appendPhotoMarkup(photo);
@@ -75,3 +72,9 @@ const simpleLightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   scrollZoomFactor: false,
 });
+
+function showFailureSearchResult() {
+  return Notify.failure(
+    'Sorry, there are no images matching your search query. Please try again.'
+  );
+}
