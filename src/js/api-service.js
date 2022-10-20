@@ -14,7 +14,7 @@ export default class PhotoApiService {
     this.per_page = 40;
   }
 
-  fetchPhoto() {
+  async fetchPhoto() {
     console.log(this);
 
     const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}&per_page=${this.per_page}&image_type=photo&orientation=horizontal&safesearch=true`;
@@ -26,7 +26,7 @@ export default class PhotoApiService {
     //     console.log('totalHits = ', photo.totalHits);
     //     return photo;
     //   });
-    return axios
+    return await axios
       .get(url)
       .then(response => {
         return response.data;

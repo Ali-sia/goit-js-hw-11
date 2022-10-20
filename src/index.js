@@ -27,7 +27,7 @@ function onSearchQuery(e) {
 
   if (photoApiService.query.trim() === '') {
     return Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.'
+      'Sorry, there are no images matching your search query. Please try again.',
     );
   }
 
@@ -40,30 +40,41 @@ function appendPhotoMarkup(photo) {
   refs.photoContainer.insertAdjacentHTML('beforeend', photoTpl(photo.hits));
 }
 
-function fetchPhoto() {
-  loadMoreBtn.show();
-  loadMoreBtn.disable();
-  photoApiService.fetchPhoto().then(photo => {
-    if (photo.totalHits === 0) {
-      loadMoreBtn.hide();
-      return Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
-      );
-    }
+async function fetchPhoto() {
+  try {
+    loadMoreBtn.show();
+    loadMoreBtn.disable();
+    await photoApiService.fetchPhoto().then(photo => {
+      if (photo.totalHits === 0) {
+        loadMoreBtn.hide();
+        return Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again.',
+        );
+      }
 
-    appendPhotoMarkup(photo);
-    loadMoreBtn.enable();
-    Notify.success(`"Hooray! We found ${photo.totalHits} images."`);
-    simpleLightbox.refresh();
+      appendPhotoMarkup(photo);
+      loadMoreBtn.enable();
+      Notify.success(`"Hooray! We found ${photo.totalHits} images."`);
+      simpleLightbox.refresh();
 
-    let totalPages = photo.totalHits / photoApiService.per_page;
-    if (photoApiService.page > totalPages) {
-      loadMoreBtn.hide();
-      return Notify.info(
-        "We're sorry, but you've reached the end of search results."
-      );
-    }
-  });
+      let totalPages = photo.totalHits / photoApiService.per_page;
+      if (photoApiService.page > totalPages) {
+        loadMoreBtn.hide();
+        return Notify.info("We're sorry, but you've reached the end of search results.");
+      }
+    });
+
+    //smooth scroll
+    const { height: cardHeight } = refs.photoContainer.firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+    //===
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function clearPhotoContainer() {
