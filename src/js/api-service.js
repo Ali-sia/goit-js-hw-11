@@ -1,7 +1,3 @@
-// key=${API_KEY}
-// const options = {
-//   key: '13420675-ac3576debf8258c428cd202e5',
-// };
 import axios from 'axios';
 
 const API_KEY = '13420675-ac3576debf8258c428cd202e5';
@@ -19,13 +15,6 @@ export default class PhotoApiService {
 
     const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}&per_page=${this.per_page}&image_type=photo&orientation=horizontal&safesearch=true`;
 
-    // return fetch(url)
-    //   .then(response => response.json())
-    //   .then(photo => {
-    //     this.incrementPage();
-    //     console.log('totalHits = ', photo.totalHits);
-    //     return photo;
-    //   });
     return await axios
       .get(url)
       .then(response => {
@@ -46,10 +35,6 @@ export default class PhotoApiService {
   resetPage() {
     this.page = 1;
   }
-
-  // countPhoto() {
-  //   return this.page * this.per_page;
-  // }
 
   get query() {
     return this.searchQuery;
