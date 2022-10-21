@@ -63,15 +63,6 @@ async function fetchPhoto() {
         return Notify.info("We're sorry, but you've reached the end of search results.");
       }
     });
-
-    //smooth scroll
-    const { height: cardHeight } = refs.photoContainer.firstElementChild.getBoundingClientRect();
-
-    window.scrollBy({
-      top: cardHeight * 2,
-      behavior: 'smooth',
-    });
-    //===
   } catch (error) {
     console.log(error);
   }
